@@ -12,6 +12,7 @@ public class EnemyExplosion : MonoBehaviour
 
     public GameObject explositionCircle;
     public GameObject scoreGraphic;
+    public GameObject explosionVFX;
 
     public Action<int> OnDeathAction;
 
@@ -31,7 +32,7 @@ public class EnemyExplosion : MonoBehaviour
         OnDeathAction?.Invoke(pointValue);
         
         StartCoroutine(waitToExplode());
-        //waitToExplode();
+        
 
     }
 
@@ -39,10 +40,13 @@ public class EnemyExplosion : MonoBehaviour
     {
         
         yield return new WaitForSeconds(0.1f);
-        GameObject go=Instantiate(scoreGraphic, this.transform.position, Quaternion.identity);
+        Vector3 pos = this.transform.position;
+        pos.z = -1f;
+        GameObject go=Instantiate(scoreGraphic, pos, Quaternion.identity);
         go.GetComponentInChildren<TMP_Text>().text = ""+pointValue*ScoreManager.Instance().getMultiplier();
         ScoreManager.Instance().increaseNum(1);
         //display vfx
+        Instantiate(explosionVFX, this.transform.position, Quaternion.identity);
 
         hitInfo = Physics.OverlapSphere(this.transform.position, radius,mask);
         if (hitInfo.Length > 0)

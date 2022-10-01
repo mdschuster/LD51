@@ -57,6 +57,8 @@ MonoBehaviour:
   explositionCircle: {fileID: 6122377070833079939}
   scoreGraphic: {fileID: 2974616589072657562, guid: 3fc78bbe03549d446a13b2a60a42883f,
     type: 3}
+  explosionVFX: {fileID: 7188321650468752897, guid: aada4a9d726372840b5fcca403e212ef,
+    type: 3}
 --- !u!114 &821138536715535928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,7 +236,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 960540c2ded6db34fb5786e6979e1c17, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
