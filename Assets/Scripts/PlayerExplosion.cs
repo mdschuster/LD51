@@ -13,7 +13,7 @@ public class PlayerExplosion : MonoBehaviour
     public GameObject explosionCircle;
 
 
-    private RaycastHit[] hitInfo;
+    private Collider[] hitInfo;
 
     private void Start()
     {
@@ -23,12 +23,12 @@ public class PlayerExplosion : MonoBehaviour
     void OnFire()
     {
         //explode (including spherecast)
-        hitInfo = Physics.SphereCastAll(this.transform.position, radius, Vector3.up, radius,mask);
+        hitInfo = Physics.OverlapSphere(this.transform.position, radius,mask);
         if (hitInfo.Length > 0)
         {
             foreach (var hit in hitInfo)
             {
-                hit.collider.gameObject.GetComponentInParent<EnemyExplosion>().explode();
+                hit.gameObject.GetComponentInParent<EnemyExplosion>().explode();
             }
         }
         //inform the action that we've exploded
@@ -39,4 +39,26 @@ public class PlayerExplosion : MonoBehaviour
         //kill player
         Destroy(this.gameObject);
     }
+    
+    // private void OnDrawGizmos()
+    // {
+    //     Gizmos.DrawWireSphere(transform.position, radius);
+    //
+    //     RaycastHit hit;
+    //     if (Physics.SphereCast(transform.position, radius, transform.forward * radius, out hit, radius, mask))
+    //     {
+    //         Gizmos.color = Color.green;
+    //         Vector3 sphereCastMidpoint = transform.position + (transform.forward * hit.distance);
+    //         Gizmos.DrawWireSphere(sphereCastMidpoint, radius);
+    //         Gizmos.DrawSphere(hit.point, 0.1f);
+    //         Debug.DrawLine(transform.position, sphereCastMidpoint, Color.green);
+    //     }
+    //     else
+    //     {
+    //         Gizmos.color = Color.red;
+    //         Vector3 sphereCastMidpoint = transform.position + (transform.forward * (radius-radius));
+    //         Gizmos.DrawWireSphere(sphereCastMidpoint, radius);
+    //         Debug.DrawLine(transform.position, sphereCastMidpoint, Color.red);
+    //     }
+    // }
 }

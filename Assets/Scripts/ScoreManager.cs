@@ -25,6 +25,14 @@ public class ScoreManager : Singleton<ScoreManager>
     private float multiplierDecayTime;
     private int multiplierIncreaseNum;
     
+        
+    [Header("Big Multiplier Properties")]
+    public TMP_Text bigMultiplier;
+    public GameObject bigMultiplierObject;
+    public float bigMultiplierTime;
+    public float targetMultiSize;
+
+    
     
     private int score=0;
     private int multiplier = 1;
@@ -44,7 +52,6 @@ public class ScoreManager : Singleton<ScoreManager>
 
     private void Update()
     {
-        multiplierDecayTime -= Time.deltaTime;
         if (multiplierIncreaseNum >= numToIncreaseMultiplier)
         {
             multiplierDecayTime = multiplierDecay;
@@ -64,6 +71,8 @@ public class ScoreManager : Singleton<ScoreManager>
             multiplierIncreaseNum = 0;
             decreaseMuliplier();
         }
+        multiplierDecayTime -= Time.deltaTime;
+
     }
 
     public void increaseNum(int value)
@@ -87,6 +96,7 @@ public class ScoreManager : Singleton<ScoreManager>
         score = 0;
         multiplier = 1;
         multiplierTimerSlider.gameObject.SetActive(false);
+        bigMultiplierObject.SetActive(false);
         updateScore();
         updateMultiplier();
 
@@ -104,6 +114,7 @@ public class ScoreManager : Singleton<ScoreManager>
         multiplier++;
         multiplierTimerSlider.gameObject.SetActive(true);
         updateMultiplier();
+        StartCoroutine(expandMultiEffect());
     }
 
     public void decreaseMuliplier()
@@ -120,5 +131,25 @@ public class ScoreManager : Singleton<ScoreManager>
     public int getMultiplier()
     {
         return multiplier;
+    }
+    
+    public IEnumerator expandMultiEffect()
+    {
+        bigMultiplierObject.SetActive(true);
+        float newSize = 0;
+        bigMultiplier.fontSize = newSize;
+        float time = 0;
+        bigMultiplier.text = "x" + multiplier;        
+        while(newSize != targetMultiSize)
+        {
+            newSize = Mathf.Lerp(newSize, targetMultiSize, time/bigMultiplierTime);
+            time += Time.deltaTime;
+            bigMultiplier.fontSize = newSize;
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(0.5f);
+        bigMultiplierObject.SetActive(false);
+        
     }
 }

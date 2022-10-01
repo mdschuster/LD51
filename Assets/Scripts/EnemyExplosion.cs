@@ -13,10 +13,9 @@ public class EnemyExplosion : MonoBehaviour
     public GameObject explositionCircle;
     public GameObject scoreGraphic;
 
-
     public Action<int> OnDeathAction;
 
-    private RaycastHit[] hitInfo;
+    private Collider[] hitInfo;
     private bool alreadyHit = false;
 
     private void Start()
@@ -43,12 +42,12 @@ public class EnemyExplosion : MonoBehaviour
         go.GetComponentInChildren<TMP_Text>().text = ""+pointValue*ScoreManager.Instance().getMultiplier();
         //display vfx
 
-        hitInfo = Physics.SphereCastAll(this.transform.position, radius, Vector3.up, radius,mask);
+        hitInfo = Physics.OverlapSphere(this.transform.position, radius,mask);
         if (hitInfo.Length > 0)
         {
             foreach (var hit in hitInfo)
             {
-                hit.collider.gameObject.GetComponentInParent<EnemyExplosion>().explode();
+                hit.GetComponent<Collider>().gameObject.GetComponentInParent<EnemyExplosion>().explode();
             }
         }
 
@@ -62,8 +61,8 @@ public class EnemyExplosion : MonoBehaviour
     {
         explositionCircle.transform.localScale = new Vector3(radius, radius, 1f);
     }
-    
-    
-    
-    
+
+
+
+
 }
