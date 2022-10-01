@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class EnemyExplosion : MonoBehaviour
@@ -10,9 +11,9 @@ public class EnemyExplosion : MonoBehaviour
     public LayerMask mask;
 
     public GameObject explositionCircle;
-    
-    
-    
+    public GameObject scoreGraphic;
+
+
     public Action<int> OnDeathAction;
 
     private RaycastHit[] hitInfo;
@@ -30,7 +31,7 @@ public class EnemyExplosion : MonoBehaviour
         alreadyHit = true;
         OnDeathAction?.Invoke(pointValue);
         ScoreManager.Instance().increaseNum(1);
-        
+
         StartCoroutine(waitToExplode());
 
     }
@@ -38,6 +39,8 @@ public class EnemyExplosion : MonoBehaviour
     private IEnumerator waitToExplode()
     {
         yield return new WaitForSeconds(0.1f);
+        GameObject go=Instantiate(scoreGraphic, this.transform.position, Quaternion.identity);
+        go.GetComponentInChildren<TMP_Text>().text = ""+pointValue*ScoreManager.Instance().getMultiplier();
         //display vfx
 
         hitInfo = Physics.SphereCastAll(this.transform.position, radius, Vector3.up, radius,mask);

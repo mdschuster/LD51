@@ -15,6 +15,8 @@ public class ScoreManager : Singleton<ScoreManager>
     public TMP_Text multiValue;
     public Slider multiplierTimerSlider;
 
+
+
     [Header("Multiplier Settings")]
     public float multiplierDecay;
     public int numToIncreaseMultiplier;
@@ -59,6 +61,7 @@ public class ScoreManager : Singleton<ScoreManager>
         if (multiplierDecayTime <= 0)
         {
             multiplierDecayTime = multiplierDecay;
+            multiplierIncreaseNum = 0;
             decreaseMuliplier();
         }
     }
