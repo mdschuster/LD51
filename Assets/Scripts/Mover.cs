@@ -29,4 +29,8 @@ public class Mover : MonoBehaviour
     {
         this.speed = speed;
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        this.gameObject.SetActive(false);
+    }
 }

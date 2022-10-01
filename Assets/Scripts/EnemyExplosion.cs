@@ -32,6 +32,7 @@ public class EnemyExplosion : MonoBehaviour
         ScoreManager.Instance().increaseNum(1);
 
         StartCoroutine(waitToExplode());
+        //waitToExplode();
 
     }
 
@@ -47,7 +48,7 @@ public class EnemyExplosion : MonoBehaviour
         {
             foreach (var hit in hitInfo)
             {
-                hit.GetComponent<Collider>().gameObject.GetComponentInParent<EnemyExplosion>().explode();
+                hit.gameObject.GetComponent<EnemyExplosion>().explode();
             }
         }
 
@@ -60,6 +61,7 @@ public class EnemyExplosion : MonoBehaviour
     public void resetEnemy()
     {
         explositionCircle.transform.localScale = new Vector3(radius, radius, 1f);
+        alreadyHit = false;
     }
 
 

@@ -27,9 +27,8 @@ public class SpawnManager : MonoBehaviour
         if (spawnTimer <= 0f)
         {
             float spawnRandom = Random.Range(0f, 1f);
-            if (spawnRandom <= 1.0f)
+            if (spawnRandom <= 0.5f)
             {
-                print("Spawn Formation");
                 spawnFormation();
             }
             else

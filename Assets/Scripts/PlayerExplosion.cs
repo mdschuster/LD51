@@ -24,11 +24,12 @@ public class PlayerExplosion : MonoBehaviour
     {
         //explode (including spherecast)
         hitInfo = Physics.OverlapSphere(this.transform.position, radius,mask);
+        print(hitInfo.Length);
         if (hitInfo.Length > 0)
         {
             foreach (var hit in hitInfo)
             {
-                hit.gameObject.GetComponentInParent<EnemyExplosion>().explode();
+                hit.gameObject.GetComponent<EnemyExplosion>().explode();
             }
         }
         //inform the action that we've exploded
