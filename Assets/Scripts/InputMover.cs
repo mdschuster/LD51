@@ -27,12 +27,6 @@ public class InputMover : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void FixedUpdate()
     {
         rb.velocity = moveAmount*speed;

@@ -8,6 +8,8 @@ public class EnemyExplosion : MonoBehaviour
     public int pointValue;
     public float radius;
     public LayerMask mask;
+
+    public GameObject explositionCircle;
     
     
     
@@ -15,6 +17,11 @@ public class EnemyExplosion : MonoBehaviour
 
     private RaycastHit[] hitInfo;
     private bool alreadyHit = false;
+
+    private void Start()
+    {
+        OnDeathAction += ScoreManager.Instance().addToScore;
+    }
 
 
     public void explode()
@@ -33,7 +40,6 @@ public class EnemyExplosion : MonoBehaviour
         //display vfx
 
         hitInfo = Physics.SphereCastAll(this.transform.position, radius, Vector3.up, radius,mask);
-        print(hitInfo.Length);
         if (hitInfo.Length > 0)
         {
             foreach (var hit in hitInfo)
@@ -44,6 +50,12 @@ public class EnemyExplosion : MonoBehaviour
 
         //destroy this object (it's pooled)
         this.gameObject.SetActive(false);
+        
+    }
+
+    public void resetEnemy()
+    {
+        explositionCircle.transform.localScale = new Vector3(radius, radius, 1f);
     }
     
     

@@ -35,8 +35,11 @@ public class SpawnManager : MonoBehaviour
         GameObject enemy = baseEnemyPool.GetPooledObject();
         if(enemy==null) Debug.LogError("Enemy Could Not Spawn");
 
-        Vector3 pos = new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), 0f);
+        Vector3 pos = new Vector3(Random.Range(-10f, 10f), Random.Range(-10f, 10f), 0f);
         enemy.transform.position = pos;
+        enemy.GetComponent<EnemyExplosion>().resetEnemy();
+        enemy.GetComponent<Mover>().setSpeed(5f);
+        enemy.GetComponent<Mover>().setDirection(new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)));
         enemy.SetActive(true);
     }
 }

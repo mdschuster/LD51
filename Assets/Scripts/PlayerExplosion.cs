@@ -10,10 +10,15 @@ public class PlayerExplosion : MonoBehaviour
 
     public float radius;
     public LayerMask mask;
+    public GameObject explosionCircle;
 
 
     private RaycastHit[] hitInfo;
-    
+
+    private void Start()
+    {
+        explosionCircle.transform.localScale = new Vector3(radius, radius, 0f);
+    }
 
     void OnFire()
     {
