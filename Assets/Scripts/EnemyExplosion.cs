@@ -21,25 +21,19 @@ public class EnemyExplosion : MonoBehaviour
     {
         if (alreadyHit) return;
         alreadyHit = true;
-        //print("Hit enemy");
         OnDeathAction?.Invoke(pointValue);
-        //display vfx
         
-        
-        //destroy this object
-        Destroy(this.gameObject);
-
-
         StartCoroutine(waitToExplode());
-
-
 
     }
 
     private IEnumerator waitToExplode()
     {
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.1f);
+        //display vfx
+
         hitInfo = Physics.SphereCastAll(this.transform.position, radius, Vector3.up, radius,mask);
+        print(hitInfo.Length);
         if (hitInfo.Length > 0)
         {
             foreach (var hit in hitInfo)
@@ -47,6 +41,9 @@ public class EnemyExplosion : MonoBehaviour
                 hit.collider.gameObject.GetComponentInParent<EnemyExplosion>().explode();
             }
         }
+
+        //destroy this object (it's pooled)
+        this.gameObject.SetActive(false);
     }
     
     

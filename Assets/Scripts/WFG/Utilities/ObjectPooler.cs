@@ -17,6 +17,7 @@ namespace WFG.Utilities
 
         private void Start()
         {
+            _pool = new List<GameObject>();
             for(int i = 0; i < amountToPool; i++)
             {
                 GameObject go=Instantiate(objectToPool,this.transform);
