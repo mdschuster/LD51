@@ -29,8 +29,7 @@ public class EnemyExplosion : MonoBehaviour
         if (alreadyHit) return;
         alreadyHit = true;
         OnDeathAction?.Invoke(pointValue);
-        ScoreManager.Instance().increaseNum(1);
-
+        
         StartCoroutine(waitToExplode());
         //waitToExplode();
 
@@ -38,9 +37,11 @@ public class EnemyExplosion : MonoBehaviour
 
     private IEnumerator waitToExplode()
     {
+        
         yield return new WaitForSeconds(0.1f);
         GameObject go=Instantiate(scoreGraphic, this.transform.position, Quaternion.identity);
         go.GetComponentInChildren<TMP_Text>().text = ""+pointValue*ScoreManager.Instance().getMultiplier();
+        ScoreManager.Instance().increaseNum(1);
         //display vfx
 
         hitInfo = Physics.OverlapSphere(this.transform.position, radius,mask);

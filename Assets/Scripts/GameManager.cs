@@ -50,5 +50,14 @@ public class GameManager : Singleton<GameManager>
         }
         resetPlayer();
     }
+
+    public GameObject getPlayer()
+    {
+        if (player == null)
+        {
+            return this.gameObject;
+        }
+        return player;
+    }
     
 }

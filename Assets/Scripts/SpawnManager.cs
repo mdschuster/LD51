@@ -44,8 +44,15 @@ public class SpawnManager : MonoBehaviour
 
     private void spawnFormation()
     {
+        float dis = 0f;
+        Vector3 pos = Vector3.zero;
         //formation position
-        Vector3 pos = new Vector3(Random.Range(-10f, 10f), Random.Range(-10f, 10f), 0f);
+        while (dis <= 10f)
+        {
+            pos = new Vector3(Random.Range(-35f, 35f), Random.Range(-35f, 35f), 0f);
+            dis = Vector3.Distance(pos, GameManager.Instance().getPlayer().transform.position);
+        }
+        
         GameObject form = Instantiate(formations[Random.Range(0, formations.Length)], pos, Quaternion.identity);
         //random rotation
         var euler = form.transform.eulerAngles;
@@ -73,7 +80,14 @@ public class SpawnManager : MonoBehaviour
         GameObject enemy = baseEnemyPool.GetPooledObject();
         if(enemy==null) Debug.LogError("Enemy Could Not Spawn");
 
-        Vector3 pos = new Vector3(Random.Range(-10f, 10f), Random.Range(-10f, 10f), 0f);
+        float dis = 0f;
+        Vector3 pos = Vector3.zero;
+        //formation position
+        while (dis <= 10f)
+        {
+            pos = new Vector3(Random.Range(-35f, 35f), Random.Range(-35f, 35f), 0f);
+            dis = Vector3.Distance(pos, GameManager.Instance().getPlayer().transform.position);
+        }
         enemy.transform.position = pos;
         enemy.GetComponent<EnemyExplosion>().resetEnemy();
         enemy.GetComponent<Mover>().setSpeed(5f);
