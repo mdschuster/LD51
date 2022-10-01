@@ -1164,6 +1164,10 @@ MonoBehaviour:
   timeBetweenSpawns: 1
   spawnTimeVariation: 0.5
   baseEnemyPool: {fileID: 705177766}
+  formations:
+  - {fileID: 58241560869666643, guid: 4200609aeb59ec4408edcfdd3437b44a, type: 3}
+  - {fileID: 1262808043958061690, guid: 9c1c0d94c3e65a24ab045108ae40dd51, type: 3}
+  - {fileID: 7682935131539902333, guid: 121b1c3ac2d9c664e8be8854ee966746, type: 3}
 --- !u!4 &935635155
 Transform:
   m_ObjectHideFlags: 0
