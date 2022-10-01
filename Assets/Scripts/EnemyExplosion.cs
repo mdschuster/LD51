@@ -29,6 +29,7 @@ public class EnemyExplosion : MonoBehaviour
         if (alreadyHit) return;
         alreadyHit = true;
         OnDeathAction?.Invoke(pointValue);
+        ScoreManager.Instance().increaseNum(1);
         
         StartCoroutine(waitToExplode());
 
@@ -48,6 +49,7 @@ public class EnemyExplosion : MonoBehaviour
             }
         }
 
+        OnDeathAction -= ScoreManager.Instance().addToScore;
         //destroy this object (it's pooled)
         this.gameObject.SetActive(false);
         
