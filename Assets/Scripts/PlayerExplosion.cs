@@ -20,8 +20,9 @@ public class PlayerExplosion : MonoBehaviour
         explosionCircle.transform.localScale = new Vector3(radius, radius, 0f);
     }
 
-    void OnFire()
+    public void OnFire()
     {
+        if (GameManager.Instance().getControls()) return;
         //explode (including spherecast)
         hitInfo = Physics.OverlapSphere(this.transform.position, radius,mask);
         print(hitInfo.Length);
@@ -38,7 +39,7 @@ public class PlayerExplosion : MonoBehaviour
         //spawn explosion effects
         
         //kill player
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
     }
     
     // private void OnDrawGizmos()

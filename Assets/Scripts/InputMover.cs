@@ -29,6 +29,7 @@ public class InputMover : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (GameManager.Instance().getControls()) return;
         rb.velocity = moveAmount*speed;
     }
 }

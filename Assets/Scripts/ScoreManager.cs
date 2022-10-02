@@ -60,18 +60,18 @@ public class ScoreManager : Singleton<ScoreManager>
         }
         
         //constantly decay multiplier
-        if (multiplier > 1)
-        {
-            multiplierTimerSlider.value = multiplierDecayTime / multiplierDecay;
-        }
+        // if (multiplier > 1)
+        // {
+        //     multiplierTimerSlider.value = multiplierDecayTime / multiplierDecay;
+        // }
 
-        if (multiplierDecayTime <= 0)
-        {
-            multiplierDecayTime = multiplierDecay;
-            multiplierIncreaseNum = 0;
-            decreaseMuliplier();
-        }
-        multiplierDecayTime -= Time.deltaTime;
+        // if (multiplierDecayTime <= 0)
+        // {
+        //     multiplierDecayTime = multiplierDecay;
+        //     multiplierIncreaseNum = 0;
+        //     decreaseMuliplier();
+        // }
+        // multiplierDecayTime -= Time.deltaTime;
 
     }
 
@@ -95,7 +95,7 @@ public class ScoreManager : Singleton<ScoreManager>
     {
         score = 0;
         multiplier = 1;
-        multiplierTimerSlider.gameObject.SetActive(false);
+        //multiplierTimerSlider.gameObject.SetActive(false);
         bigMultiplierObject.SetActive(false);
         updateScore();
         updateMultiplier();
@@ -112,7 +112,7 @@ public class ScoreManager : Singleton<ScoreManager>
     public void increaseMultiplier()
     {
         multiplier++;
-        multiplierTimerSlider.gameObject.SetActive(true);
+        //multiplierTimerSlider.gameObject.SetActive(true);
         updateMultiplier();
         StartCoroutine(expandMultiEffect());
     }
@@ -122,7 +122,7 @@ public class ScoreManager : Singleton<ScoreManager>
         multiplier--;
         if (multiplier <= 1)
         {
-            multiplierTimerSlider.gameObject.SetActive(false);
+            //multiplierTimerSlider.gameObject.SetActive(false);
             multiplier = 1;
         }
         updateMultiplier();
@@ -151,5 +151,10 @@ public class ScoreManager : Singleton<ScoreManager>
         yield return new WaitForSeconds(0.5f);
         bigMultiplierObject.SetActive(false);
         
+    }
+
+    public int getScore()
+    {
+        return score;
     }
 }
