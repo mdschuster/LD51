@@ -5,6 +5,7 @@ using System.Timers;
 using Cinemachine;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using WFG.Utilities;
 
 public class GameManager : Singleton<GameManager>
@@ -125,7 +126,7 @@ public class GameManager : Singleton<GameManager>
 
     public void onMenuClick()
     {
-        
+        SceneManager.LoadScene("Menu");
     }
     
 }
