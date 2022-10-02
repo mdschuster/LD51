@@ -8,7 +8,7 @@ public class MusicManager : Singleton<MusicManager>
 {
 
 
-    private void Awake() {
+    private new void Awake() {
         base.Awake();
         DontDestroyOnLoad(this);
     }

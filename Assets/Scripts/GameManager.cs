@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Timers;
 using Cinemachine;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using WFG.Utilities;
 
-public class GameManager : Singleton<GameManager>
+public class GameManager : WFG.Utilities.Singleton<GameManager>
 {
     public GameObject PlayerPrefab;
     private GameObject player;
@@ -19,6 +19,7 @@ public class GameManager : Singleton<GameManager>
 
     public TMP_Text pulseValueText;
     public float pulseTime;
+    public GameObject pulseBeep;
     private float pulseTimer;
 
     public TMP_Text bombsLeftText;
@@ -30,6 +31,8 @@ public class GameManager : Singleton<GameManager>
 
     private bool lockControls;
     private bool isGameOver;
+
+    private bool played = false;
     
     new void Awake()
     {
@@ -55,6 +58,13 @@ public class GameManager : Singleton<GameManager>
         pulseTimer -= Time.deltaTime;
         //update pulse UI
         pulseValueText.text=String.Format("{0:0.0}", pulseTimer);
+
+        if (pulseTimer <= 3 && !played)
+        {
+            played = true;
+            StartCoroutine(playBeepOnCountdown());
+        }
+        
         if (pulseTimer <= 0)
         {
             bombsLeft--;
@@ -68,7 +78,17 @@ public class GameManager : Singleton<GameManager>
                 return;
             }
             pulseTimer = pulseTime;
+            played = false;
 
+        }
+    }
+
+    public IEnumerator playBeepOnCountdown()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            Instantiate(pulseBeep, this.transform.position, Quaternion.identity);
+            yield return new WaitForSeconds(1f);
         }
     }
     

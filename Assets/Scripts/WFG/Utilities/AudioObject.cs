@@ -17,6 +17,7 @@ namespace WFG.Utilities
         
         private void Start()
         {
+            _audioSource = GetComponent<AudioSource>();
             if (clips.Length != 0)
             {
                 _audioSource.loop = false;

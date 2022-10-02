@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Unity.Mathematics;
 
 public class PlayerExplosion : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class PlayerExplosion : MonoBehaviour
     public float radius;
     public LayerMask mask;
     public GameObject explosionCircle;
+
+    public GameObject ExplosionAudio;
+    public GameObject PulseAudio;
 
 
     private Collider[] hitInfo;
@@ -28,6 +32,7 @@ public class PlayerExplosion : MonoBehaviour
         print(hitInfo.Length);
         if (hitInfo.Length > 0)
         {
+            StartCoroutine(playExplosionAudio());
             foreach (var hit in hitInfo)
             {
                 hit.gameObject.GetComponent<EnemyExplosion>().explode();
@@ -40,6 +45,12 @@ public class PlayerExplosion : MonoBehaviour
         
         //kill player
         //Destroy(this.gameObject);
+    }
+
+    public IEnumerator playExplosionAudio()
+    {
+        yield return new WaitForSeconds(0.15f);
+        Instantiate(ExplosionAudio, this.transform.position, Quaternion.identity);
     }
     
     // private void OnDrawGizmos()

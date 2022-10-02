@@ -67,6 +67,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   explosionCircle: {fileID: 3542841464138101061}
+  ExplosionAudio: {fileID: 814523489207347572, guid: 3d0a778419678c043bb358eaa1cca7fc,
+    type: 3}
+  PulseAudio: {fileID: 0}
 --- !u!54 &9130323609538167457
 Rigidbody:
   m_ObjectHideFlags: 0
