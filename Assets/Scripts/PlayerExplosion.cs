@@ -42,7 +42,8 @@ public class PlayerExplosion : MonoBehaviour
         OnDeathAction?.Invoke();
         
         //spawn explosion effects
-        
+        Instantiate(PulseAudio, this.transform.position, Quaternion.identity);
+
         //kill player
         //Destroy(this.gameObject);
     }

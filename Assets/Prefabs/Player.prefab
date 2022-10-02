@@ -69,7 +69,8 @@ MonoBehaviour:
   explosionCircle: {fileID: 3542841464138101061}
   ExplosionAudio: {fileID: 814523489207347572, guid: 3d0a778419678c043bb358eaa1cca7fc,
     type: 3}
-  PulseAudio: {fileID: 0}
+  PulseAudio: {fileID: 3203992222946758712, guid: 9394c08e3b8fb6b4cb12d470f9623d57,
+    type: 3}
 --- !u!54 &9130323609538167457
 Rigidbody:
   m_ObjectHideFlags: 0
