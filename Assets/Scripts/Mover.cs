@@ -29,7 +29,7 @@ public class Mover : MonoBehaviour
     {
         this.speed = speed;
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
         this.gameObject.SetActive(false);
     }
