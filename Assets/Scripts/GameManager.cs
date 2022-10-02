@@ -64,7 +64,7 @@ public class GameManager : Singleton<GameManager>
             player.GetComponent<PlayerExplosion>().OnFire();
             if (bombsLeft <= 0)
             {
-                gameOver();
+                StartCoroutine(gameOver());
                 return;
             }
             pulseTimer = pulseTime;
@@ -107,8 +107,9 @@ public class GameManager : Singleton<GameManager>
         return player;
     }
 
-    private void gameOver()
+    private IEnumerator gameOver()
     {
+        yield return new WaitForSeconds(2f);
         isGameOver = true;
         //show game over panel
         gameOverCanvas.gameObject.SetActive(true);
