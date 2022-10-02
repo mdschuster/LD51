@@ -31,6 +31,9 @@ public class Mover : MonoBehaviour
     }
     private void OnCollisionEnter(Collision other)
     {
-        this.gameObject.SetActive(false);
+        if (other.gameObject.tag == "Wall")
+        {
+            this.gameObject.SetActive(false);
+        }
     }
 }

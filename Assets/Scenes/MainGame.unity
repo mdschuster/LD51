@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 60345987}
   m_Layer: 0
   m_Name: RightWall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2148,7 +2148,7 @@ GameObject:
   - component: {fileID: 938517746}
   m_Layer: 0
   m_Name: LeftWall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3374,7 +3374,7 @@ GameObject:
   - component: {fileID: 1523845013}
   m_Layer: 0
   m_Name: BottomWall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3652,7 +3652,7 @@ GameObject:
   - component: {fileID: 1716373533}
   m_Layer: 0
   m_Name: TopWall
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4094,7 +4094,7 @@ MonoBehaviour:
   pulseBeep: {fileID: 3392927330097129252, guid: eb08f7c2f1642784ca4c20d10588372b,
     type: 3}
   bombsLeftText: {fileID: 2054469171}
-  totalBombs: 1
+  totalBombs: 10
   finalScore: {fileID: 638816847}
   gameOverCanvas: {fileID: 1180961176}
 --- !u!1 &2143893312
