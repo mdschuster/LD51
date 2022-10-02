@@ -16,6 +16,8 @@ public class PlayerExplosion : MonoBehaviour
     public GameObject ExplosionAudio;
     public GameObject PulseAudio;
 
+    public MeshRenderer pulseRenderer;
+
 
     private Collider[] hitInfo;
 
@@ -43,6 +45,7 @@ public class PlayerExplosion : MonoBehaviour
         
         //spawn explosion effects
         Instantiate(PulseAudio, this.transform.position, Quaternion.identity);
+        StartCoroutine(activatePulseFX());
 
         //kill player
         //Destroy(this.gameObject);
@@ -50,8 +53,46 @@ public class PlayerExplosion : MonoBehaviour
 
     public IEnumerator playExplosionAudio()
     {
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.2f);
         Instantiate(ExplosionAudio, this.transform.position, Quaternion.identity);
+    }
+
+    public IEnumerator activatePulseFX()
+    {
+        
+        pulseRenderer.material.SetFloat("_Intensity",25);
+        //pulseRenderer.material.SetFloat("_AlphaIntensity",1);
+        float targetAlpha = 1;
+        float alpha = 0;
+        float time = 0;
+        //ramp alpha up
+        while(alpha != targetAlpha)
+        {
+            alpha = Mathf.Lerp(alpha, targetAlpha, time/0.25f);
+            time += Time.deltaTime;
+            pulseRenderer.material.SetFloat("_AlphaIntensity",alpha);
+
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(0.25f);
+        
+        //ramp alpha down
+        targetAlpha = 0;
+        alpha = 1;
+        time = 0;
+        while(alpha != targetAlpha)
+        {
+            alpha = Mathf.Lerp(alpha, targetAlpha, time/0.5f);
+            time += Time.deltaTime;
+            pulseRenderer.material.SetFloat("_AlphaIntensity",alpha);
+
+            yield return null;
+        }
+
+        pulseRenderer.material.SetFloat("_Intensity",0);
+        pulseRenderer.material.SetFloat("_AlphaIntensity",0);
+
     }
     
     // private void OnDrawGizmos()

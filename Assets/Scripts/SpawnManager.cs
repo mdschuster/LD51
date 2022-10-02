@@ -73,6 +73,7 @@ public class SpawnManager : MonoBehaviour
             enemy.GetComponent<Mover>().setDirection(direction);
             enemy.SetActive(true);
         }
+        Destroy(form);
     }
 
     private void spawnSingleEnemy()
