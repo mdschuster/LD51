@@ -26,12 +26,11 @@ public class PlayerExplosion : MonoBehaviour
         explosionCircle.transform.localScale = new Vector3(radius, radius, 0f);
     }
 
-    public void OnFire()
+    public void OnPulse()
     {
         if (GameManager.Instance().getControls()) return;
         //explode (including spherecast)
         hitInfo = Physics.OverlapSphere(this.transform.position, radius,mask);
-        print(hitInfo.Length);
         if (hitInfo.Length > 0)
         {
             StartCoroutine(playExplosionAudio());

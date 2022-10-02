@@ -8,7 +8,7 @@ using UnityEngine.PlayerLoop;
 using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
-public class ScoreManager : Singleton<ScoreManager>
+public class ScoreManager : MonoBehaviour
 {
     [Header("UI Connections")]
     public TMP_Text scoreValue;
@@ -37,9 +37,18 @@ public class ScoreManager : Singleton<ScoreManager>
     private int score=0;
     private int multiplier = 1;
 
-    new void Awake()
-    {
-        base.Awake();
+    private static ScoreManager instance = null;
+
+    private void Awake() {
+        if (instance == null) {
+            instance = this;
+        } else {
+            Destroy(this);
+        }
+    }
+
+    public static ScoreManager Instance() {
+        return instance;
     }
     
     // Start is called before the first frame update

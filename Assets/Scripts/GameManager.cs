@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : WFG.Utilities.Singleton<GameManager>
+public class GameManager : MonoBehaviour
 {
     public GameObject PlayerPrefab;
     private GameObject player;
@@ -34,10 +34,18 @@ public class GameManager : WFG.Utilities.Singleton<GameManager>
 
     private bool played = false;
     
-    new void Awake()
-    {
-        base.Awake();
-        
+    private static GameManager instance = null;
+
+    private void Awake() {
+        if (instance == null) {
+            instance = this;
+        } else {
+            Destroy(this);
+        }
+    }
+
+    public static GameManager Instance() {
+        return instance;
     }
     
     // Start is called before the first frame update
@@ -71,7 +79,7 @@ public class GameManager : WFG.Utilities.Singleton<GameManager>
             bombsLeftText.text = ""+bombsLeft;
 
             //pulse
-            player.GetComponent<PlayerExplosion>().OnFire();
+            player.GetComponent<PlayerExplosion>().OnPulse();
             if (bombsLeft <= 0)
             {
                 StartCoroutine(gameOver());
@@ -129,8 +137,10 @@ public class GameManager : WFG.Utilities.Singleton<GameManager>
 
     private IEnumerator gameOver()
     {
-        yield return new WaitForSeconds(2f);
         isGameOver = true;
+        lockControls = true;
+        yield return new WaitForSeconds(2f);
+
         //show game over panel
         gameOverCanvas.gameObject.SetActive(true);
         finalScore.text = "" + ScoreManager.Instance().getScore();

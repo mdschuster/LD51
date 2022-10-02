@@ -24,6 +24,7 @@ public class SpawnManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance().getControls()) return;
         if (spawnTimer <= 0f)
         {
             float spawnRandom = Random.Range(0f, 1f);
@@ -47,7 +48,7 @@ public class SpawnManager : MonoBehaviour
         float dis = 0f;
         Vector3 pos = Vector3.zero;
         //formation position
-        while (dis <= 10f)
+        while (dis <= 20f)
         {
             pos = new Vector3(Random.Range(-35f, 35f), Random.Range(-35f, 35f), 0f);
             dis = Vector3.Distance(pos, GameManager.Instance().getPlayer().transform.position);
